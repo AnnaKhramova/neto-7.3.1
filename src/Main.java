@@ -18,45 +18,21 @@ public class Main {
         Thread thread1 = new Thread(() -> {
             for (String text : texts) {
                 if (IntStream.range(0, text.length() / 2).noneMatch(i -> text.charAt(i) != text.charAt(text.length() - i - 1))) {
-                    if (text.length() == 3) {
-                        length3.getAndIncrement();
-                    }
-                    if (text.length() == 4) {
-                        length4.getAndIncrement();
-                    }
-                    if (text.length() == 5) {
-                        length5.getAndIncrement();
-                    }
+                    increment(text);
                 }
             }
         });
         Thread thread2 = new Thread(() -> {
             for (String text : texts) {
                 if (IntStream.range(1, text.length()).noneMatch(i -> text.charAt(i) != text.charAt(0))) {
-                    if (text.length() == 3) {
-                        length3.getAndIncrement();
-                    }
-                    if (text.length() == 4) {
-                        length4.getAndIncrement();
-                    }
-                    if (text.length() == 5) {
-                        length5.getAndIncrement();
-                    }
+                    increment(text);
                 }
             }
         });
         Thread thread3 = new Thread(() -> {
             for (String text : texts) {
                 if (IntStream.range(1, text.length()).noneMatch(i -> text.charAt(i) < text.charAt(i - 1))) {
-                    if (text.length() == 3) {
-                        length3.getAndIncrement();
-                    }
-                    if (text.length() == 4) {
-                        length4.getAndIncrement();
-                    }
-                    if (text.length() == 5) {
-                        length5.getAndIncrement();
-                    }
+                    increment(text);
                 }
             }
         });
@@ -81,5 +57,17 @@ public class Main {
             text.append(letters.charAt(random.nextInt(letters.length())));
         }
         return text.toString();
+    }
+
+    public static void increment(String text) {
+        if (text.length() == 3) {
+            length3.getAndIncrement();
+        }
+        if (text.length() == 4) {
+            length4.getAndIncrement();
+        }
+        if (text.length() == 5) {
+            length5.getAndIncrement();
+        }
     }
 }
